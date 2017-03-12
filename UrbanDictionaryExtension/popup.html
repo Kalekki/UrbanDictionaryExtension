@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Urban Dictionary Defining Extension</title>
+    <style>
+      body {
+        width: 350px;
+        height: 100px;
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 100%;
+        background-color: #1D2439;
+      }
+      
+      #searchTerm {
+        color: #134FE6;
+        font-size: 2rem;
+        font-weight: bold;
+        line-height: 129%;
+        margin-top: -20px;
+      }
+      
+      #searchBar {
+        width: 260px;
+        height: 25px;
+        border-radius: 4px;
+        font-size: 105%;
+      }
+      
+      #searchButton {
+        margin-left: 10px;
+        height: 25px;
+        border-radius: 4px;
+      }
+      
+      #searchTerm {
+        margin-top: 0px;
+      }
+      
+      #defineArea {
+        border-style: solid;
+        border-width: 0px;
+        border-color: #e3e3e3;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        margin-top: 15px;
+        /*padding: 1.25rem;*/
+        background: #FFFFFF;
+        color: #333333;
+        box-shadow: 1px 1px 2px #DBDBDB;
+        word-wrap: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" placeholder="Urban Dictionary Defining Extension" id="searchBar">
+    <button id="searchButton">Define!</button>
+    <div id="defineArea">
+      <h2 id="searchTerm">Yeehaw</h2>
+      <h2 id="definition"></h2><br>
+      <h3 id="example"></h3>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>
