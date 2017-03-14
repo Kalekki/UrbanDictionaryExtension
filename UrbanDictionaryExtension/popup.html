@@ -5,60 +5,83 @@
     <style>
       body {
         width: 350px;
-        height: 100px;
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        min-height: 25px;
+        margin:0;
+        font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
         font-size: 100%;
-        background-color: #1D2439;
+        background-color: #566ba9;
+      }
+
+      #searcharea{
+        background-color: #252f49;
+        height:25px;
+        padding:5px 5px 5px 5px;
       }
       
-      #searchTerm {
-        color: #134FE6;
-        font-size: 2rem;
-        font-weight: bold;
-        line-height: 129%;
-        margin-top: -20px;
-      }
-      
+
       #searchBar {
         width: 260px;
-        height: 25px;
-        border-radius: 4px;
-        font-size: 105%;
       }
-      
+
       #searchButton {
-        margin-left: 10px;
-        height: 25px;
-        border-radius: 4px;
+        border-style: none;
+        border-radius: 3px;
+        font-family: Arial;
+        color: #ffffff;
+        font-size: 16px;
+        background: #0068e6;
+        margin-left:8px;
+        padding: 1px 5px 1px 5px;
+        text-decoration: none;
       }
-      
-      #searchTerm {
-        margin-top: 0px;
+
+      #searchButton:hover {
+        background: #003cb3;
+        text-decoration: none;
       }
       
       #defineArea {
-        border-style: solid;
-        border-width: 0px;
-        border-color: #e3e3e3;
-        border-radius: 4px;
-        margin-bottom: 20px;
-        margin-top: 15px;
-        /*padding: 1.25rem;*/
+        padding:10px 5px 5px 5px;
         background: #FFFFFF;
         color: #333333;
-        box-shadow: 1px 1px 2px #DBDBDB;
         word-wrap: break-word;
       }
+
+      #defineTerm {
+        color: #134FE6;
+        font-size: 1.4rem;
+        font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+        margin-bottom: 10px;
+        font-weight: bold;
+        line-height: 129%;
+        cursor:pointer;
+      }
+
+      #defineDefinition{
+        color: black;
+        font-size: 14px;
+        font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+        line-height: 100%;
+        text-decoration: none;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      #defineExample{
+        color: black;
+        font-size: 12px;
+        font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+        font-style: italic
+      }
+      
     </style>
   </head>
   <body>
-    <input type="text" placeholder="Urban Dictionary Defining Extension" id="searchBar">
-    <button id="searchButton">Define!</button>
-    <div id="defineArea">
-      <h2 id="searchTerm">Yeehaw</h2>
-      <h2 id="definition"></h2><br>
-      <h3 id="example"></h3>
+    <div id="searcharea">
+      <input type="text" placeholder="Urban Dictionary Defining Extension" id="searchBar">
+      <button id="searchButton">Define!</button>
     </div>
+    <script src="jquery-2.2.4.min.js"></script>
     <script src="popup.js"></script>
   </body>
 </html>

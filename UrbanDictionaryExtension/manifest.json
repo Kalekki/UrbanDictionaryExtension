@@ -10,11 +10,6 @@
     "default_popup": "popup.html"
   },
 
-  "background":{
-    "scripts":["events.js"],
-    "persistent": false
-  },
-
   "permissions": [
     "activeTab",
     "http://api.urbandictionary.com/"
@@ -23,7 +18,7 @@
     {
       "matches": ["*://*/*"],
       "css":["style.css"],
-      "js": ["jquery-2.2.4.js","content.js"],
+      "js": ["jquery-2.2.4.min.js","content.js"],
       "run_at":"document_idle"
     }
   ]

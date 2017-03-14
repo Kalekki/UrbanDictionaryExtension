@@ -9,11 +9,11 @@
         overflow: auto;
         background-color: white;
         border-radius: 4px;
-        padding: 15px 15px 10px 10px;
+        padding: 5px 15px 10px 10px;
         margin: 20px 20px 20px 20px;
         background: #FFFFFF;
         color: #000000;
-        font-family:  monospace;
+        font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
         border: 2px rgba(0, 0, 0, 0.6) solid;
         box-shadow: 0px 4px 25px -1px rgba(0,0,0,0.51);
         -webkit-box-shadow: 0px 4px 25px -1px rgba(0,0,0,0.51);
@@ -21,21 +21,26 @@
 #deftitle{
         color: #134FE6;
         font-size: 1.4rem;
+        font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
         margin-bottom: 10px;
         font-weight: bold;
         line-height: 129%;
         text-decoration: underline;
     }
 #deftext{
-        visibility: inherit;
+        visibility:visible;
         color: black;
         font-size: 14px;
+        font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
         line-height: 100%;
         text-decoration: none;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 #defexample{
-        visibility: inherit;
+        visibility: visible;
         color: black;
         font-size: 12px;
+        font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
         font-style: italic
 }

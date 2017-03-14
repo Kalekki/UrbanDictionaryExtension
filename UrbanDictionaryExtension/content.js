@@ -7,13 +7,13 @@
 
     Urbandictionary.com isn't a burn book or a webjournal site.
 
-    by Lucy March 18, 2005
+        by Lucy March 18, 2005
 */
 
 
 /* TODO:
          Make a toggle between context menu and double click
-         Parse examples better
+         Parse [urls]
          de-spaghettify
  */
 
@@ -37,38 +37,62 @@
             ]
   }
 */
-var cY = 0;
 
+//Mouse coords
+var pX,pY,cY;
+
+// DoubleClick to define!
 document.ondblclick = function (e) {
-    cY = e.clientY;
     var selection = window.getSelection().toString().replace(" ", "");
     if (selection != "" && encodeURIComponent(selection) != "%0A") {
-        // GET THE DEFINITION
-        var apiUrl = 'https://api.urbandictionary.com/v0/define?term=' + encodeURIComponent(selection);
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', apiUrl)
-        xhr.responseType = 'json'
-        xhr.onload = function () {
-            var response = xhr.response;
-            if (response.result_type == "no_results") {
-                console.log("no_results")
-                displayResult("¯\_(ツ)_/¯", "No results", "Es nada", e.pageX, e.pageY)
-            } else {
-                console.log(response.list[0].definition)
-                displayResult(response.list[0].word, response.list[0].definition, response.list[0].example, e.pageX, e.pageY)
-            }
-        }
-        xhr.onerror = function () {
-            console.log("xhr error")
-        }
-        xhr.send(null)
+        define(selection);
     }
 
 }
 
+// remove box when clicking outside, and update mouse coords
+$(document).mouseup(function (e) {
+    cY = e.clientY;
+    pX = e.pageX;
+    pY = e.pageY;
+    var cont = $("#defbox");
+    if (cont) {
+        if ($(e.target).parents("#defbox").length === 0) {
+            cont.remove();
+        }
+    }
+    // Just select to define!
+    if(true /* TODO:  replace with option! */){
+        var selection = window.getSelection().toString();
+            if (selection != "" && encodeURIComponent(selection) != "%0A") {
+                define(selection.trim());
+            }
+    }
+});
 
+function define(term){
+    var apiUrl = 'https://api.urbandictionary.com/v0/define?term=' + encodeURIComponent(term);
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', apiUrl)
+    xhr.responseType = 'json'
+    xhr.onload = function () {
+        var response = xhr.response;
+        if (response.result_type == "no_results") {
+            console.log("no_results")
+            displayResult("No results", ":(", "Maybe you could define this?")
+        } else {
+            console.log(response.list[0].definition)
+            console.log(response.list[0].example)
+            displayResult(response.list[0].word, response.list[0].definition, response.list[0].example)
+        }
+    }
+    xhr.onerror = function () {
+        console.log("xhr error")
+    }
+    xhr.send(null)
+}
 
-function displayResult(term, definition, example, x, y) {
+function displayResult(term, definition, example) {
     $('#defbox').remove();
     var $div = $('<div>', {
         id: "defbox"
@@ -76,10 +100,10 @@ function displayResult(term, definition, example, x, y) {
     var $titletext = $('<a>', {
         id: "deftitle"
     })
-    var $deftext = $('<h2>', {
+    var $deftext = $('<div>', {
         id: "deftext"
     })
-    var $defexample = $('<h3>', {
+    var $defexample = $('<div>', {
         id: "defexample"
     })
 
@@ -87,9 +111,9 @@ function displayResult(term, definition, example, x, y) {
     $titletext.text(term);
     $titletext.attr("href", "http://www.urbandictionary.com/define.php?term=" + term)
     $titletext.attr("target", "_blank")
-    $titletext.wrap("<h1>")
-    $deftext.text(definition);
-    $defexample.text(example);
+    //$titletext.wrap("<h1>")
+    $deftext.html(definition.replace(new RegExp('\r?\n','g'), '<br />'));
+    $defexample.html(example.replace(new RegExp('\r?\n','g'), '<br />'));
     $div.append($titletext);
     $div.append($deftext);
     $div.append($defexample);
@@ -101,32 +125,23 @@ function displayResult(term, definition, example, x, y) {
     var div_width = $div.outerWidth();
     var x_offset = div_width / 2;
     var y_offset = div_height / 2;
-    var yy, xx
+    var x,y
     if (cY > window_height / 2) {
-        yy = y - (div_height + 35)
+        y = pY - (div_height + 35)
     } else {
-        yy = y
+        y = pY
     }
-    if (x < div_width / 2) {
-        xx = 0
-    } else if (x > window_width - x_offset) {
-        xx = window_width - div_width
+    if (pX < div_width / 2) {
+        x = 0
+    } else if (pX > window_width - x_offset) {
+        x = window_width - div_width
     } else {
-        xx = x - x_offset
+        x = pX - x_offset
     }
     $div.css({
-        "top": yy + "px",
-        "left": xx + "px"
+        "top": y + "px",
+        "left": x + "px"
     });
     // 
 
 }
-// remove box when clicking outside
-$(document).mouseup(function (e) {
-    var cont = $("#defbox");
-    if (cont) {
-        if ($(e.target).parents("#defbox").length === 0) {
-            cont.remove();
-        }
-    }
-});
